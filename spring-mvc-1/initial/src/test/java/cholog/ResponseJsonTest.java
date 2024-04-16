@@ -13,12 +13,21 @@ class ResponseJsonTest {
     @Test
     void responseJson() {
         var response = RestAssured
-            .given().log().all()
-            .when().get("/json")
-            .then().log().all().extract();
+                .given()
+                .log()
+                .all()
+                .when()
+                .get("/json")
+                .then()
+                .log()
+                .all()
+                .extract();
+
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.as(Person.class).getName()).isEqualTo("brown");
-        assertThat(response.as(Person.class).getAge()).isEqualTo(20);
+        assertThat(response.as(Person.class)
+                           .getName()).isEqualTo("brown");
+        assertThat(response.as(Person.class)
+                           .getAge()).isEqualTo(20);
     }
 }
